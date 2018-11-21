@@ -29,7 +29,7 @@ while (true) {
 
     $read = $client;
 
-    //socket_select($read, $write, $except, null);
+    socket_select($read, $write, $except, null);
 
     foreach ($read as $fd) {
         if ($fd == $resource) {

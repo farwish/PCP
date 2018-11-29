@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <meta charset=utf-8>
+    <body>
+    [系统平均负载]
+    <p id="load"></p>
+
+    <hr>
+
+    [系统内存]
+    <p id="memory"></p>
+
+    <hr>
+
+    [系统容量]
+    <p id="disk"></p>
+
+    </body>
+    <script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+    // @doc https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
+
+    try {
+        var ws = new WebSocket('ws://192.168.157.139:8081');
+
+        ws.onmessage = function(event) {
+            var data = event.data;
+            var obj = $.parseJSON(data);
+
+            var load = '';
+            var memory = '';
+            var disk = '';
+
+            $.each (obj.load, function (k, v) {
+                load = load + "<p>"+ v +"</p>";
+            });
+            $('#load').html(load);
+
+            $.each (obj.memory, function (k, v) {
+               memory = memory + "<p>"+ v +"</p>";
+            });
+            $('#memory').html(memory);
+
+            $.each (obj.disk, function (k, v) {
+               disk = disk + "<p>"+ v +"</p>";
+            });
+            $('#disk').html(disk);
+        };
+        ws.onclose = function() {
+            console.log('server closed');
+        };
+        ws.onerror = function() {
+            console.log('server error');
+        };
+    } catch (e) {
+        alert(e.message);
+    }
+    </script>
+</html>

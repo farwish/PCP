@@ -1,6 +1,5 @@
 # PHP并发编程
 
-**[组织]** Wechat: farwish || Q群: 377154148
 
 ## 概述
 
@@ -64,3 +63,4 @@
 
 * 38 结尾
 
+Author WeChat: farwish
